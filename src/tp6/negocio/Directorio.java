@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import javax.swing.JOptionPane;
 
 // buscarTeléfono() que en base a un apellido nos devuelve una lista con los nros de 
 //teléfono asociados a dicho apellido.
@@ -13,15 +14,8 @@ public class Directorio {
     private HashMap<String,Cliente> registro=new HashMap<String,Cliente>();
     
     public Cliente buscarCliente(String numTelefono){
-        for (Map.Entry<String, Cliente> entry : registro.entrySet()) {
-            String key = entry.getKey();
-            Cliente value = entry.getValue();
-            if(numTelefono.equals(key)){
-                return value;
-            }
-        }
-        System.out.println("No se encontrò el telefono asociado a un cliente");
-        return null;
+             
+        return registro.get(numTelefono);
     }
 public ArrayList<Cliente> buscarClientes(String ciudad){
         
@@ -69,10 +63,10 @@ public ArrayList<Cliente> buscarClientes(String ciudad){
     
     public void borrarCliente(String telefono){
         Cliente aux = registro.remove(telefono);
-        if (aux!=null) {
-            System.out.println("Se ha eliminado correctamente.");
+        if (aux==null) {
+            JOptionPane.showMessageDialog(null,"Dato no Encontrado");
         } else {
-            System.out.println("Cliente no encontrado.");
+            JOptionPane.showMessageDialog(null,"Cliente eliminado");
         }
     }
 }
